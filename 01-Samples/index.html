@@ -1,0 +1,56 @@
+<html>
+	<body>
+		<script src="jquery-1.12.0.min.js"></script>
+		<script src="underscore-min.js"></script>
+		<script src="backbone-min.js"></script>
+		<title>BackboneJS</title>
+		<input type="text" id="txtPrueba" />
+		<input id="btnPost" type="button" value="Post" onclick="TestBackbone();" />
+		<!--
+		<br>
+		<label id="lblPost"></label>
+		-->
+	</body>
+	<script type="text/javascript">
+		function TestBackbone(){
+			//Create model class.
+			var User = Backbone.Model.extend({});
+			
+			//Create a new instance.
+			var user1 = new User({
+				name: "DFT"
+			});
+			
+			console.log(user1.attributes.name);
+			
+			//Setting a value for url property.
+			//user1.url = "/users";
+			
+			//Save the user.
+			//user1.save();
+			
+			//Get the user data.
+			//user1.fetch();
+			
+			//Create JS object using JSON notation.
+			var jsonObj = {};
+
+			//Extend the object using the class Backbone.Events
+			//To extend an object use the method _.extend(), belonging to Underscore.js library.
+			_.extend(jsonObj, Backbone.Events);
+			
+			//Create the event with its callback function.
+			jsonObj.on("myevent", function(message){
+				console.log("This is your message: " + message);				
+				//$("#lblPost").html(message);
+			});
+			
+			//Nota: En proyectos que tengan un número muy elevado de eventos nos recomiendan en la documentación de BackboneJS usar, 
+			//por convención, el carácter dos puntos ":" para crear un espacio de nombres, por ejemplo "encuesta:empezar", "combociudades:desplegando".
+			
+			//Trigger the event.
+			jsonObj.trigger("myevent", $("#txtPrueba").val());
+		}
+		
+	</script>
+</html>
